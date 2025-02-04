@@ -24,7 +24,7 @@ class PresetScreen(Screen):
     # contagem regressiva customizada
     pass
 
-class ClockApp(MDApp):
+class CronosApp(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -67,5 +67,5 @@ class ClockApp(MDApp):
 
 # Executa o aplicativo
 if __name__ == '__main__':
-    ClockApp().run()
+    CronosApp().run()
 
