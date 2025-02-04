@@ -1,0 +1,104 @@
+ScreenManager:
+    HomeScreen:
+    CronometroScreen:
+    TemporizadorScreen:
+    AlarmeScreen:
+    PresetScreen:
+
+<HomeScreen>:
+    name: 'home'
+    MDFloatLayout:
+        md_bg_color: 0, 0, 0, 1  # Fundo preto
+
+        MDLabel:
+            text: 'Clock App'
+            halign: 'center'
+            font_style: 'H4'
+            theme_text_color: 'Primary'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+
+        MDRaisedButton:
+            text: 'Cronômetro'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            on_release: app.root.current = 'cronometro'
+
+        MDRaisedButton:
+            text: 'Temporizador'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_release: app.root.current = 'temporizador'
+
+        MDRaisedButton:
+            text: 'Alarme'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            on_release: app.root.current = 'alarme'
+
+        MDRaisedButton:
+            text: 'Pre-sets'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_release: app.root.current = 'preset'
+
+<CronometroScreen>:
+    name: 'cronometro'
+    MDFloatLayout:
+        md_bg_color: 0, 0, 0, 1
+
+        MDLabel:
+            id: cronometro_tempo
+            text: '00:00:00'
+            halign: 'center'
+            font_style: 'H2'
+            theme_text_color: 'Primary'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+        MDRaisedButton:
+            text: 'Iniciar'
+            pos_hint: {'center_x': 0.3, 'center_y': 0.4}
+            on_release: app.iniciar_cronometro()
+
+        MDRaisedButton:
+            text: 'Pausar'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            on_release: app.pausar_cronometro()
+
+        MDRaisedButton:
+            text: 'Resetar'
+            pos_hint: {'center_x': 0.7, 'center_y': 0.4}
+            on_release: app.resetar_cronometro()
+
+        MDRaisedButton:
+            text: 'Voltar'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            on_release: app.root.current = 'home'
+
+<TemporizadorScreen>:
+    name: 'temporizador'
+    MDFloatLayout:
+        md_bg_color: 0, 0, 0, 1
+
+        MDLabel:
+            id: temporizador_tempo
+            text: '00:00:00'
+            halign: 'center'
+            font_style: 'H2'
+            theme_text_color: 'Primary'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+        MDRaisedButton:
+            text: 'Iniciar'
+            pos_hint: {'center_x': 0.3, 'center_y': 0.4}
+            on_release: app.iniciar_cronometro()
+
+        MDRaisedButton:
+            text: 'Pausar'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            on_release: app.pausar_cronometro()
+
+        MDRaisedButton:
+            text: 'Resetar'
+            pos_hint: {'center_x': 0.7, 'center_y': 0.4}
+            on_release: app.resetar_cronometro()
+
+        MDRaisedButton:
+            text: 'Voltar'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            on_release: app.root.current = 'home'
