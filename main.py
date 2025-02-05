@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.clock import Clock
+import datetime
 
 from cronometro import Cronometro
 from temporizador import Temporizador
@@ -40,6 +41,21 @@ class CronosApp(MDApp):
 
         return Builder.load_file('interface.kv')
 
+    def on_start(self):
+        self.iniciar_relogio()
+
+        temporizador_screen = self.root.get_screen('temporizador')
+        horas_display = temporizador_screen.ids.horas
+        minutos_display = temporizador_screen.ids.minutos
+        segundos_display = temporizador_screen.ids.segundos
+        self.temporizador.definir_tempo(0, 0, 0, horas_display, minutos_display, segundos_display)
+
+    def iniciar_relogio(self):
+        Clock.schedule_interval(self.atualizar_relogio, 1)
+
+    def atualizar_relogio(self, *args):
+        self.root.get_screen('home').ids.relogio.text = datetime.datetime.now().strftime('%H:%M:%S')
+
     def iniciar_cronometro(self):
         self.cronometro.iniciar(self.root.get_screen('cronometro').ids.cronometro_tempo)
 
@@ -50,13 +66,21 @@ class CronosApp(MDApp):
         self.cronometro.resetar(self.root.get_screen('cronometro').ids.cronometro_tempo)
 
     def iniciar_temporizador(self):
-        self.temporizador.iniciar(self.root.get_screen('temporizador').ids.temporizador_tempo)
-
+        temporizador_screen = self.root.get_screen('temporizador')
+        horas_display = temporizador_screen.ids.horas
+        minutos_display = temporizador_screen.ids.minutos
+        segundos_display = temporizador_screen.ids.segundos
+        self.temporizador.iniciar(horas_display, minutos_display, segundos_display)
+    
     def pausar_temporizador(self):
         self.temporizador.pausar()
 
     def resetar_temporizador(self):
-        self.temporizador.resetar(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        temporizador_screen = self.root.get_screen('temporizador')
+        horas_display = temporizador_screen.ids.horas
+        minutos_display = temporizador_screen.ids.minutos
+        segundos_display = temporizador_screen.ids.segundos
+        self.temporizador.resetar(horas_display, minutos_display, segundos_display)
 
     def incrementar_horas(self):
         self.temporizador.incrementar_horas(self.root.get_screen('temporizador').ids.temporizador_tempo)
