@@ -6,24 +6,32 @@ class Temporizador:
         self.minutos = 0
         self.segundos = 0
         self.evento = None
-        self.display_widget = None
+        self.horas_display = None
+        self.minutos_display = None
+        self.segundos_display = None
 
-    def iniciar(self, display_widget):
+    def iniciar(self, horas_display, minutos_display, segundos_display):
         if not self.evento:
-            self.display_widget = display_widget
+            self.horas_display = horas_display
+            self.minutos_display = minutos_display
+            self.segundos_display = segundos_display
             self.evento = Clock.schedule_interval(self.atualizar, 1)
+            
 
     def pausar(self):
         if self.evento:
             self.evento.cancel()
             self.evento = None
 
-    def resetar(self, display_widget):
+    def resetar(self, horas_display, minutos_display, segundos_display):
         self.pausar()
         self.horas = 0
         self.minutos = 0
         self.segundos = 0
-        display_widget.text = '00:00:00'
+        self.horas_display = horas_display
+        self.minutos_display = minutos_display
+        self.segundos_display = segundos_display
+        self.atualizar_display()
 
     def atualizar(self, dt):
         if self.horas == 0 and self.minutos == 0 and self.segundos == 0:
@@ -41,15 +49,27 @@ class Temporizador:
         self.atualizar_display()
 
     def atualizar_display(self):
-        if self.display_widget:
-            self.display_widget.text = f"{self.horas:02}:{self.minutos:02}:{self.segundos:02}"
+        if self.horas_display and self.minutos_display and self.segundos_display:
+            self.horas_display.text = f"{self.horas:02}"
+            self.minutos_display.text = f"{self.minutos:02}"
+            self.segundos_display.text = f"{self.segundos:02}"
 
-    def incrementar_horas(self):
-        self.horas = (self.horas + 1) % 100
+    def definir_tempo(self, horas, minutos, segundos, horas_display, minutos_display, segundos_display):
+        self.horas = horas
+        self.minutos = minutos
+        self.segundos = segundos
+        self.horas_display = horas_display
+        self.minutos_display = minutos_display
+        self.segundos_display = segundos_display
         self.atualizar_display()
 
+    def incrementar_horas(self):
+        if not self.evento:
+            self.horas = (self.horas + 1) % 24
+            self.atualizar_display()
+
     def decrementar_horas(self):
-        self.horas = (self.horas - 1) % 100
+        self.horas = (self.horas - 1) % 24
         self.atualizar_display()
 
     def incrementar_minutos(self):
