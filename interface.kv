@@ -7,6 +7,7 @@ ScreenManager:
 
 <HomeScreen>:
     name: 'home'
+
     MDFloatLayout:
         md_bg_color: 0, 0, 0, 1  # Fundo preto
 
@@ -25,7 +26,10 @@ ScreenManager:
         MDRaisedButton:
             text: 'Temporizador'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_release: app.root.current = 'temporizador'
+            on_release: 
+                app.root.current = 'temporizador' 
+                app.iniciar_temporizador()
+                app.resetar_temporizador()
 
         MDRaisedButton:
             text: 'Alarme'
@@ -75,30 +79,107 @@ ScreenManager:
     MDFloatLayout:
         md_bg_color: 0, 0, 0, 1
 
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: (0.6, 0.2)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: None
+                width: self.height
+
+                MDIconButton:
+                    icon: 'chevron-up'
+                    on_release: app.temporizador.incrementar_horas()
+
+                MDLabel:
+                    id: horas
+                    text: '00'
+                    halign: 'center'
+                    font_style: 'H4'
+                    theme_text_color: 'Primary'
+
+                MDIconButton:
+                    icon: 'chevron-down'
+                    on_release: app.temporizador.decrementar_horas()
+
+            MDLabel:
+                text: ':'
+                halign: 'center'
+                font_style: 'H4'
+                theme_text_color: 'Primary'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: None
+                width: self.height
+
+                MDIconButton:
+                    icon: 'chevron-up'
+                    on_release: app.temporizador.incrementar_minutos()
+
+                MDLabel:
+                    id: minutos
+                    text: '00'
+                    halign: 'center'
+                    font_style: 'H4'
+                    theme_text_color: 'Primary'
+
+                MDIconButton:
+                    icon: 'chevron-down'
+                    on_release: app.temporizador.decrementar_minutos()
+
+            MDLabel:
+                text: ':'
+                halign: 'center'
+                font_style: 'H4'
+                theme_text_color: 'Primary'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: None
+                width: self.height
+
+                MDIconButton:
+                    icon: 'chevron-up'
+                    on_release: app.temporizador.incrementar_segundos()
+
+                MDLabel:
+                    id: segundos
+                    text: '00'
+                    halign: 'center'
+                    font_style: 'H4'
+                    theme_text_color: 'Primary'
+
+                MDIconButton:
+                    icon: 'chevron-down'
+                    on_release: app.temporizador.decrementar_segundos()
+
         MDLabel:
             id: temporizador_tempo
-            text: '00:00:00:000'
+            text: '00:00:00'
             halign: 'center'
             font_style: 'H2'
             theme_text_color: 'Primary'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         MDRaisedButton:
             text: 'Iniciar'
-            pos_hint: {'center_x': 0.3, 'center_y': 0.4}
-            on_release: app.iniciar_cronometro()
+            pos_hint: {'center_x': 0.3, 'center_y': 0.3}
+            on_release: app.iniciar_temporizador()
 
         MDRaisedButton:
             text: 'Pausar'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
-            on_release: app.pausar_cronometro()
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_release: app.pausar_temporizador()
 
         MDRaisedButton:
             text: 'Resetar'
-            pos_hint: {'center_x': 0.7, 'center_y': 0.4}
-            on_release: app.resetar_cronometro()
+            pos_hint: {'center_x': 0.7, 'center_y': 0.3}
+            on_release: app.resetar_temporizador()
 
         MDRaisedButton:
             text: 'Voltar'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release: app.root.current = 'home'
