@@ -37,6 +37,7 @@ class CronosApp(MDApp):
         super().__init__(**kwargs)
         self.cronometro = Cronometro()
         self.temporizador = Temporizador()
+        self.alarme = Alarme()
         
     def build(self):
         # Define o tema escuro
@@ -46,6 +47,7 @@ class CronosApp(MDApp):
         return Builder.load_file('interface.kv')
 
     def on_start(self):
+
         self.iniciar_relogio()
 
         temporizador_screen = self.root.get_screen('temporizador')
@@ -103,6 +105,10 @@ class CronosApp(MDApp):
 
     def decrementar_segundos(self):
         self.temporizador.decrementar_segundos(self.root.get_screen('temporizador').ids.temporizador_tempo)
+
+    def adicionar_alarme(self):
+        self.alarme.adicionar_alarme()
+        
 
 
 # Executa o aplicativo
