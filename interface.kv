@@ -9,7 +9,7 @@ ScreenManager:
     name: 'home'
 
     MDFloatLayout:
-        md_bg_color: 0, 0, 0, 1  # Fundo preto
+        md_bg_color: 0.2, 0, 0.25
 
         MDLabel:
             text: 'Cronos App'
@@ -26,39 +26,46 @@ ScreenManager:
             theme_text_color: 'Primary'
             pos_hint: {'center_x': 0.5, 'center_y': 0.75}
 
-        MDRaisedButton:
+        MDRoundFlatIconButton:
             text: 'Cronômetro'
             pos_hint: {'center_x': 0.5, 'center_y': 0.6}
             size_hint_x: 0.6
             size_hint_y: 0.05
             on_release: app.root.current = 'cronometro'
+            icon: 'timer-play'
+            md_bg_color: (1.0, 1.0, 1.0, 1.0)
 
-        MDRaisedButton:
+        MDRoundFlatIconButton:
             text: 'Temporizador'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             size_hint_x: 0.6
             size_hint_y: 0.05
-            on_release: 
-                app.root.current = 'temporizador' 
+            on_release: app.root.current = 'temporizador' 
+            icon: 'timer-sand'
+            md_bg_color: (1.0, 1.0, 1.0, 1.0)
 
-        MDRaisedButton:
+        MDRoundFlatIconButton:
             text: 'Alarme'
             pos_hint: {'center_x': 0.5, 'center_y': 0.4}
             size_hint_x: 0.6
             size_hint_y: 0.05
             on_release: app.root.current = 'alarme'
+            icon: 'alarm'
+            md_bg_color: (1.0, 1.0, 1.0, 1.0)
 
-        MDRaisedButton:
+        MDRoundFlatIconButton:
             text: 'Pre-sets'
             pos_hint: {'center_x': 0.5, 'center_y': 0.3}
             size_hint_x: 0.6
             size_hint_y: 0.05
             on_release: app.root.current = 'preset'
+            icon: 'timer-sync'
+            md_bg_color: (1.0, 1.0, 1.0, 1.0)
 
 <CronometroScreen>:
     name: 'cronometro'
     MDFloatLayout:
-        md_bg_color: 0, 0, 0, 1
+        md_bg_color: 0.2, 0, 0.25
 
         MDLabel:
             id: cronometro_tempo
@@ -92,7 +99,7 @@ ScreenManager:
 <TemporizadorScreen>:
     name: 'temporizador'
     MDFloatLayout:
-        md_bg_color: 0, 0, 0, 1
+        md_bg_color: 0.2, 0, 0.25
 
         MDIconButton:
             icon: 'chevron-up'
@@ -181,3 +188,18 @@ ScreenManager:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release: app.root.current = 'home'
+<AlarmeScreen>:
+    name: 'alarme'
+    MDFloatLayout:
+        md_bg_color: 0.2, 0, 0.25
+        padding: (10, 10)
+
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {'center_x': 0.1, 'center_y': 0.93}
+            on_release: app.root.current = 'home'
+
+        MDIconButton:
+            icon: 'clock-plus'
+            pos_hint: {'center_x': 0.9, 'center_y': 0.93}
+            on_release: app.adicionar_alarme()
