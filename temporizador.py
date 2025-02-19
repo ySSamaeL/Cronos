@@ -69,21 +69,26 @@ class Temporizador:
             self.atualizar_display()
 
     def decrementar_horas(self):
-        self.horas = (self.horas - 1) % 24
-        self.atualizar_display()
+        if not self.evento:
+            self.horas = (self.horas - 1) % 24
+            self.atualizar_display()
 
     def incrementar_minutos(self):
-        self.minutos = (self.minutos + 1) % 60
-        self.atualizar_display()
+        if not self.evento:
+            self.minutos = (self.minutos + 1) % 60
+            self.atualizar_display()
 
     def decrementar_minutos(self):
-        self.minutos = (self.minutos - 1) % 60
-        self.atualizar_display()
+        if not self.evento:
+            self.minutos = (self.minutos - 1) % 60
+            self.atualizar_display()
 
     def incrementar_segundos(self):
-        self.segundos = (self.segundos + 1) % 60
-        self.atualizar_display()
+        if not self.evento:
+            self.segundos = (self.segundos + 1) % 60
+            self.atualizar_display()
 
     def decrementar_segundos(self):
-        self.segundos = (self.segundos - 1) % 60
-        self.atualizar_display()
+        if not self.evento:
+            self.segundos = (self.segundos - 1) % 60
+            self.atualizar_display()
