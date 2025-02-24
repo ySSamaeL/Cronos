@@ -3,44 +3,51 @@ import datetime
 from kivymd.uix.pickers import MDTimePicker
 from kivymd.uix.pickers import MDDatePicker
 from kivy.core.window import Window
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
 
 class Alarme:
     def __init__(self):
         self.alarmesativos = []
         self.evento = None
         self.display_widget = None
+        self.data_selecionada = None
+        self.hora_selecionada = None
 
     def adicionar_alarme(self):
-        
         date_dialog = MDDatePicker()
-        date_dialog.bind(on_save=self.on_savedata, on_cancel=self.on_canceldata)
+        date_dialog.bind(on_save=self.salvardata, on_cancel=self.cancelardata)
         date_dialog.open()
         Window.size = (450, 751)
         Window.size = (450, 750)
         
         time_dialog = MDTimePicker()
-        time_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+        time_dialog.bind(on_save=self.salvarhora, on_cancel=self.cancelarhora)
         time_dialog.open()
         Window.size = (450, 751)
         Window.size = (450, 750)
 
-    def on_savedata(self, instance, value, date_range):
+    def salvardata(self, instance, value, date_range):
+        self.data_selecionada = value
+        print(f"Data selecionada: {self.data_selecionada}")
+        
+    def salvarhora(self, instance, value):
+        self.hora_selecionada = value
+        print(f"Hora selecionada: {self.hora_selecionada}")
+        self.criar_alarme_visual()
 
-        '''
-        Events called when the "OK" dialog box button is clicked.
-
-        :type instance: <kivymd.uix.picker.MDDatePicker object>;
-        :param value: selected date;
-        :type value: <class 'datetime.date'>;
-        :param date_range: list of 'datetime.date' objects in the selected range;
-        :type date_range: <class 'list'>;
-        '''
-
-        print(instance, value, date_range)
-
-    def on_canceldata(self, instance, value):
-        '''Events called when the "CANCEL" dialog box button is clicked.'''
-    def on_save(self, instance, value):
-        print(instance, value)
-    def on_cancel(self, instance, value):
+    def cancelardata(self, instance, value):
         pass
+
+    def cancelarhora(self, instance, value):
+        pass
+
+    def criar_alarme_visual(self):
+        if self.data_selecionada and self.hora_selecionada:
+            alarme_layout = BoxLayout(orientation='horizontal')
+            data_label = Label(text=str(self.data_selecionada))
+            hora_label = Label(text=str(self.hora_selecionada))
+            alarme_layout.add_widget(data_label)
+            alarme_layout.add_widget(hora_label)
+            self.display_widget.add_widget(alarme_layout)
+            self.alarmesativos.append((self.data_selecionada, self.hora_selecionada))

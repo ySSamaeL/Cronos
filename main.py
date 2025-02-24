@@ -13,23 +13,18 @@ Window.size = (450, 750)
 
 # Telas
 class HomeScreen(Screen):
-    # tela conterá relógio mundial
     pass
 
 class AlarmeScreen(Screen):
-    # multiplos alarmes, definir horário/data de cada um.
     pass
 
 class CronometroScreen(Screen):
-    # cronometro unico, contar infinitamente até pause ou encerramento
     pass
 
 class TemporizadorScreen(Screen):
-    # contagem regressiva, regredir de valor definido antes do inicio do cronometro
     pass
 
 class PresetScreen(Screen):
-    # contagem regressiva customizada
     pass
 
 class CronosApp(MDApp):
@@ -40,14 +35,14 @@ class CronosApp(MDApp):
         self.alarme = Alarme()
         
     def build(self):
-        # Define o tema escuro
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "DeepPurple"
 
-        return Builder.load_file('interface.kv')
+        root = Builder.load_file('interface.kv')
+        self.alarme.display_widget = root.get_screen('alarme').ids.alarme_layout
+        return root
 
     def on_start(self):
-
         self.iniciar_relogio()
 
         temporizador_screen = self.root.get_screen('temporizador')
@@ -108,9 +103,6 @@ class CronosApp(MDApp):
 
     def adicionar_alarme(self):
         self.alarme.adicionar_alarme()
-        
 
-
-# Executa o aplicativo
 if __name__ == '__main__':
     CronosApp().run()
