@@ -11,7 +11,6 @@ from alarme import Alarme
 
 Window.size = (450, 750)
 
-# Telas
 class HomeScreen(Screen):
     pass
 
@@ -32,14 +31,14 @@ class CronosApp(MDApp):
         super().__init__(**kwargs)
         self.cronometro = Cronometro()
         self.temporizador = Temporizador()
-        self.alarme = Alarme()
-        
+        self.alarme = None  # Inicialize com None
+
     def build(self):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "DeepPurple"
 
         root = Builder.load_file('interface.kv')
-        self.alarme.display_widget = root.get_screen('alarme').ids.alarme_layout
+        self.alarme = Alarme(root.get_screen('alarme').ids.alarme_layout)  # Defina display_widget aqui
         return root
 
     def on_start(self):
@@ -84,22 +83,22 @@ class CronosApp(MDApp):
         self.temporizador.resetar(horas_display, minutos_display, segundos_display)
 
     def incrementar_horas(self):
-        self.temporizador.incrementar_horas(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        self.temporizador.incrementar_horas(self.root.get_screen('temporizador').ids.horas)
 
     def decrementar_horas(self):
-        self.temporizador.decrementar_horas(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        self.temporizador.decrementar_horas(self.root.get_screen('temporizador').ids.horas)
 
     def incrementar_minutos(self):
-        self.temporizador.incrementar_minutos(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        self.temporizador.incrementar_minutos(self.root.get_screen('temporizador').ids.minutos)
 
     def decrementar_minutos(self):
-        self.temporizador.decrementar_minutos(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        self.temporizador.decrementar_minutos(self.root.get_screen('temporizador').ids.minutos)
 
     def incrementar_segundos(self):
-        self.temporizador.incrementar_segundos(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        self.temporizador.incrementar_segundos(self.root.get_screen('temporizador').ids.segundos)
 
     def decrementar_segundos(self):
-        self.temporizador.decrementar_segundos(self.root.get_screen('temporizador').ids.temporizador_tempo)
+        self.temporizador.decrementar_segundos(self.root.get_screen('temporizador').ids.segundos)
 
     def adicionar_alarme(self):
         self.alarme.adicionar_alarme()
