@@ -1,15 +1,17 @@
-from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.core.window import Window
 import datetime
+from kivy.config import Config
 
 from cronometro import Cronometro
 from temporizador import Temporizador
 from alarme import Alarme
 
 Window.size = (450, 750)
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
 class HomeScreen(Screen):
     pass

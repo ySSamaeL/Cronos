@@ -2,7 +2,7 @@ from kivy.clock import Clock
 from kivymd.uix.pickers import MDTimePicker, MDDatePicker
 from kivy.core.window import Window
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton, MDIconButton
+from kivymd.uix.button import MDFlatButton
 from kivymd.app import MDApp
 from kivymd.uix.list import OneLineAvatarIconListItem, IconLeftWidget, IconRightWidget 
 from datetime import datetime, timedelta
@@ -91,7 +91,7 @@ class Alarme:
 
     def criar_alarme(self):
         if self.data_selecionada and self.hora_selecionada:
-            # Cria um novo objeto Alarme
+
             novo_alarme = Alarme(self.alarmes_lista)
             novo_alarme.data_selecionada = self.data_selecionada
             novo_alarme.hora_selecionada = self.hora_selecionada
@@ -99,12 +99,12 @@ class Alarme:
             self.atualizar_lista_alarmes()
 
     def atualizar_lista_alarmes(self):
-        # Ordena os alarmes pela data e hora
+
         self.alarmesativos.sort(key=lambda alarme: datetime.combine(alarme.data_selecionada, alarme.hora_selecionada))
 
         self.alarmes_lista.clear_widgets()
         for alarme in self.alarmesativos:
-            # Cria o item do alarme
+
             alarme_item = OneLineAvatarIconListItem(
                 IconLeftWidget(icon="pencil", on_release=self.criar_editar_alarme_callback(alarme)),
                 IconRightWidget(
@@ -113,7 +113,7 @@ class Alarme:
                 ),
                 text=str(alarme)
             )
-            # Adiciona o item à lista de alarmes
+
             self.alarmes_lista.add_widget(alarme_item)
 
     def criar_editar_alarme_callback(self, alarme):
@@ -127,7 +127,7 @@ class Alarme:
         return remover_alarme_callback
 
     def editar_alarme(self, alarme):
-        # Abre o diálogo de edição para o alarme selecionado
+
         self.data_selecionada = alarme.data_selecionada
         self.hora_selecionada = alarme.hora_selecionada
 
@@ -167,7 +167,6 @@ class Alarme:
 
     def salvar_hora_edicao(self, instance, value, alarme):
         self.hora_selecionada = value
-        horaminima = (datetime.now() + timedelta(minutes=1)).time()
         if self.data_selecionada == datetime.now().date() and self.hora_selecionada < datetime.now().time():
             error_dialog = MDDialog(
                 title="Hora Inválida",
@@ -204,13 +203,13 @@ class Alarme:
         
         
     def remover_alarme(self, alarme):
-        # Remove o alarme da lista de alarmes ativos
+
         self.alarmesativos.remove(alarme)
-        # Atualiza a lista de widgets
+
         self.atualizar_lista_alarmes()
 
     def alarmar(self):
-        icon_path = os.path.join(os.path.dirname(__file__), 'assets/alarme-check.ico')
+        icon_path = os.path.join(os.path.dirname(__file__), 'assets/alarmcheck.ico')
         sound_path = os.path.join(os.path.dirname(__file__), 'assets/somalarme.mp3')
 
         notification.notify(
@@ -218,8 +217,8 @@ class Alarme:
             message="O alarme foi disparado!",
             app_name="Cronos",
             app_icon=icon_path,
-            timeout=10  # Tempo em segundos que a notificação será exibida
-        )
+            timeout=10
+            ) 
 
         pygame.mixer.music.load(sound_path)
         pygame.mixer.music.set_volume(0.01)

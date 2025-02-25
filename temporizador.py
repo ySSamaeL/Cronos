@@ -115,7 +115,7 @@ class Temporizador:
             message="O temporizador foi disparado!",
             app_name="Cronos",
             app_icon=icon_path,
-            timeout=10  # Tempo em segundos que a notificação será exibida
+            timeout=10 
         )
 
         pygame.mixer.music.load(sound_path)

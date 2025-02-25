@@ -28,7 +28,7 @@ ScreenManager:
 
         MDRoundFlatIconButton:
             text: 'Cronômetro'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             size_hint_x: 0.6
             size_hint_y: 0.05
             on_release: app.root.current = 'cronometro'
@@ -37,7 +37,7 @@ ScreenManager:
 
         MDRoundFlatIconButton:
             text: 'Temporizador'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
             size_hint_x: 0.6
             size_hint_y: 0.05
             on_release: app.root.current = 'temporizador' 
@@ -46,20 +46,11 @@ ScreenManager:
 
         MDRoundFlatIconButton:
             text: 'Alarme'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
             size_hint_x: 0.6
             size_hint_y: 0.05
             on_release: app.root.current = 'alarme'
             icon: 'alarm'
-            md_bg_color: (1.0, 1.0, 1.0, 1.0)
-
-        MDRoundFlatIconButton:
-            text: 'Pre-sets'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-            size_hint_x: 0.6
-            size_hint_y: 0.05
-            on_release: app.root.current = 'preset'
-            icon: 'timer-sync'
             md_bg_color: (1.0, 1.0, 1.0, 1.0)
 
 <CronometroScreen>:
