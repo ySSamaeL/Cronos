@@ -188,6 +188,7 @@ ScreenManager:
             icon: 'arrow-left'
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_release: app.root.current = 'home'
+
 <AlarmeScreen>:
     name: 'alarme'
     MDFloatLayout:
@@ -203,6 +204,12 @@ ScreenManager:
             icon: 'clock-plus'
             pos_hint: {'center_x': 0.9, 'center_y': 0.93}
             on_release: app.adicionar_alarme()
-        BoxLayout:
-            id: alarme_layout
-            orientation: 'vertical'
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: (0.9, 0.8)
+
+            MDList:
+                id: alarmes_list
+                padding: 10
+                spacing: 10

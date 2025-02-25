@@ -27,6 +27,7 @@ class PresetScreen(Screen):
     pass
 
 class CronosApp(MDApp):
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.cronometro = Cronometro()
@@ -38,7 +39,10 @@ class CronosApp(MDApp):
         self.theme_cls.primary_palette = "DeepPurple"
 
         root = Builder.load_file('interface.kv')
-        self.alarme = Alarme(root.get_screen('alarme').ids.alarme_layout)  # Defina display_widget aqui
+
+        alarme_screen = root.get_screen('alarme')
+        self.alarme = Alarme(alarme_screen.ids.alarmes_list)  # Passa o MDList diretamente
+        
         return root
 
     def on_start(self):
@@ -102,6 +106,9 @@ class CronosApp(MDApp):
 
     def adicionar_alarme(self):
         self.alarme.adicionar_alarme()
+   
+    def remover_alarme(self, item):
+        self.alarme.remover_alarme(item)
 
 if __name__ == '__main__':
     CronosApp().run()
