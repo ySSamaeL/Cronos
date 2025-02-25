@@ -22,16 +22,16 @@ class Alarme:
         return f"{self.data_selecionada.strftime('%d/%m/%Y')} - {self.hora_selecionada.strftime('%H:%M')}" if self.data_selecionada and self.hora_selecionada else ""
 
     def adicionar_alarme(self):
-        self.adicionardata()
+        self.adicionar_data()
         
-    def adicionardata(self):
+    def adicionar_data(self):
         date_dialog = MDDatePicker(min_date=datetime.now().date())
-        date_dialog.bind(on_save=self.salvardata, on_cancel=self.cancelardata)
+        date_dialog.bind(on_save=self.salvar_data, on_cancel=self.cancelar_data)
         date_dialog.open()
         Window.size = (450, 751)
         Window.size = (450, 750)         
 
-    def salvardata(self, instance, value, date_range):
+    def salvar_data(self, instance, value, date_range):
         self.data_selecionada = value
         if self.data_selecionada < datetime.now().date():
             error_dialog = MDDialog(
@@ -49,18 +49,18 @@ class Alarme:
             error_dialog.open()
             return
         print(f"Data selecionada: {self.data_selecionada}")
-        self.adicionarhora()
+        self.adicionar_hora()
 
-    def adicionarhora(self):
+    def adicionar_hora(self):
         time_dialog = MDTimePicker()
         horaatual = (datetime.now() + timedelta(minutes=1)).time()
         time_dialog.set_time(horaatual)
-        time_dialog.bind(on_save=self.salvarhora, on_cancel=self.cancelarhora)
+        time_dialog.bind(on_save=self.salvar_hora, on_cancel=self.cancelar_hora)
         time_dialog.open()
         Window.size = (450, 751)
         Window.size = (450, 750)
 
-    def salvarhora(self, instance, value):
+    def salvar_hora(self, instance, value):
         self.hora_selecionada = value
         horaminima = (datetime.now() + timedelta(minutes=1)).time()
         print(self.hora_selecionada)
@@ -83,10 +83,10 @@ class Alarme:
         print(f"Hora selecionada: {self.hora_selecionada}")
         self.criar_alarme()
 
-    def cancelardata(self, instance, value):
+    def cancelar_data(self, instance, value):
         print("Seleção data cancelada!")
 
-    def cancelarhora(self, instance, value):
+    def cancelar_hora(self, instance, value):
         print("Seleção hora cancelada!")
 
     def criar_alarme(self):
@@ -144,12 +144,13 @@ class Alarme:
             title="Alarme",
             text="O alarme foi disparado!",
             buttons=[
-                MDFlatButton(
-                    text="OK",
-                    theme_text_color="Custom",
-                    text_color=MDApp.get_running_app().theme_cls.primary_color,
-                    on_release=lambda x: (alarm_dialog.dismiss(), self.atualizar_lista_alarmes())
-                )
+            MDFlatButton(
+                text="OK",
+                theme_text_color="Custom",
+                text_color=MDApp.get_running_app().theme_cls.primary_color,
+                on_release=lambda x: (alarm_dialog.dismiss(), self.atualizar_lista_alarmes())
+            )
             ],
         )
+        alarm_dialog.bind(on_dismiss=lambda x: self.atualizar_lista_alarmes())
         alarm_dialog.open()
