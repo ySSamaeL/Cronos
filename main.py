@@ -1,10 +1,11 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.clock import Clock
 from kivy.core.window import Window
-import datetime
 from kivy.config import Config
+
+from kivy.clock import Clock
+import datetime
 
 from cronometro import Cronometro
 from temporizador import Temporizador
@@ -25,16 +26,13 @@ class CronometroScreen(Screen):
 class TemporizadorScreen(Screen):
     pass
 
-class PresetScreen(Screen):
-    pass
-
 class CronosApp(MDApp):
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.cronometro = Cronometro()
         self.temporizador = Temporizador()
-        self.alarme = None  # Inicialize com None
+        self.alarme = None 
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -43,7 +41,7 @@ class CronosApp(MDApp):
         root = Builder.load_file('interface.kv')
 
         alarme_screen = root.get_screen('alarme')
-        self.alarme = Alarme(alarme_screen.ids.alarmes_list)  # Passa o MDList diretamente
+        self.alarme = Alarme(alarme_screen.ids.alarmes_list)  
         
         return root
 

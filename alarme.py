@@ -6,6 +6,7 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.app import MDApp
 from kivymd.uix.list import OneLineAvatarIconListItem, IconLeftWidget, IconRightWidget 
 from datetime import datetime, timedelta
+
 from plyer import notification
 import os
 import pygame
@@ -88,11 +89,11 @@ class Alarme:
             return
         self.criar_alarme()
 
-    # Cancela a seleção da data
+    # Cancelamento da seleção da data
     def cancelar_data(self, instance, value):
         print("Seleção data cancelada!")
 
-    # Cancela a seleção da hora
+    # Cancelamento da seleção da hora
     def cancelar_hora(self, instance, value):
         print("Seleção hora cancelada!")
 

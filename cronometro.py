@@ -18,7 +18,6 @@ class Cronometro:
             self.evento.cancel()
             self.evento = None
 
-    # Reseta o cronômetro, pausando-o e zerando o tempo total
     def resetar(self, display_widget):
         self.pausar()
         self.tempo_total = 0

@@ -2,6 +2,7 @@ from kivy.clock import Clock
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivymd.app import MDApp
+
 from plyer import notification
 import os
 import pygame
